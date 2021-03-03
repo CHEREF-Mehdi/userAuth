@@ -1,0 +1,25 @@
+version: '3.5'
+
+services:
+  dataBase:
+    restart: always
+    container_name: db_ctnr
+    image: mongo
+    ports:
+      - '27017:27017'
+
+  api:
+    restart: always
+    image: api_img
+    container_name: api_ctnr
+    env_file: .env
+    build: .
+    command: ["npm", "start"]
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - '$API_PORT:$API_PORT'
+    links:
+      - dataBase
+ 
