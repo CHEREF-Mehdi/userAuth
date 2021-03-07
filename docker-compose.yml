@@ -6,7 +6,13 @@ services:
     container_name: db_ctnr
     image: mongo
     ports:
-      - '27017:27017'
+      - '8585:27017'
+
+  redis-server:
+    image: redis
+    container_name: cache
+    ports:
+      - "6379:6379"
 
   api:
     restart: always
@@ -22,4 +28,5 @@ services:
       - '$API_PORT:$API_PORT'
     links:
       - dataBase
+      - redis-server
  

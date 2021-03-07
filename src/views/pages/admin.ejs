@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
+    <%- include('../partials/common'); %>
+    <main>
+      <div class="jumbotron">
+        <div class="card">
+          <div class="card-header" style="display: flex; justify-content:space-between;">
+            <div>Users</div>
+            <div>
+              <a
+                class="btn btn-primary"
+                href="http://localhost:89"
+                role="button"
+                >Go to home page</a
+              >
+            </div>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">ID</th>
+                  <th scope="col">Role</th>
+                  <th scope="col">Username</th>
+                </tr>
+              </thead>
+              <tbody id="tableBody"></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      axiosApiInstance({
+        method: "GET",
+        url: BASE_API_URL + "/api/user/admin",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem(ACCESS_TOKEN),
+        },
+      }).then((res) => {
+        const { usersList } = res.data;
+        let html = "";
+        if (usersList) {
+          usersList.forEach((user, key) => {
+            html += `<tr>
+              <th scope="row">${key}</th>
+              <td>${user._id}</td>
+              <td>${user.role}</td>
+              <td>${user.username}</td>
+            </tr>`;
+          });
+        }
+        document.getElementById("tableBody").innerHTML = html;
+      });
+    </script>
+  </body>
+</html>

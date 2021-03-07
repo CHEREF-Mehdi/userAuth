@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../partials/head'); %>
+  </head>
+  <body class="container">
+    <%- include('../partials/common'); %>
+    <header><%- include('../partials/header'); %></header>
+
+    <main>
+      <div class="jumbotron">
+        <% if(tab===1) { %>
+        <h1>Welcome to your Home page</h1>
+
+        <div class="card">
+          <div class="card-header">User Home page</div>
+          <div class="card-body">
+            <h5 class="card-title" id="sayHello"></h5>
+            <p class="card-text">
+              You can update your info by clicking on this button
+            </p>
+            <div id="divForm" style="display: none">
+              <form id="update-Form">
+                <div class="form-group">
+                  <label for="exampleInputEmail1">Email address</label>
+                  <input
+                    minlength="3"
+                    maxlength="30"
+                    class="form-control"
+                    id="usernameInput"
+                    placeholder="Enter your username"
+                    required="true"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="password">Old Password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="password"
+                    placeholder="Enter your Password"
+                    required="true"
+                    minlength="4"
+                    maxlength="30"
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="repeat_password">New password</label>
+                  <input
+                    type="password"
+                    class="form-control"
+                    id="repeat_password"
+                    placeholder="Confirm Password"
+                    required="true"
+                    minlength="4"
+                    maxlength="30"
+                  />
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+            <div id="divBtn" style="display: flex; flex-wrap: nowrap;">
+              <button class="btn btn-primary" id="doUpdate" style="margin: 5px;">
+                update username
+              </button>
+              <div id="adminLink" style="margin: 5px;"></div>
+            </div>
+          </div>
+        </div>
+
+        <script>
+          const accessToken = localStorage.getItem(ACCESS_TOKEN);
+
+          const getUserInfo = async () => {
+            return axiosApiInstance({
+              method: "get",
+              url: BASE_API_URL + "/api/user/profile",
+              headers: {
+                "Content-Type": "application/json",
+                Authorization: "Bearer " + accessToken,
+              },
+            })
+              .then((response) => {
+                return response.data;
+              })
+              .catch((err) => console.log(err));
+          };
+
+          let currentUser;
+          getUserInfo().then((data) => {
+            const { user } = data;
+            currentUser = { ...user };
+            if (user) {
+              if (user.role === 1) {
+                document.getElementById(
+                  "adminLink"
+                ).innerHTML = `<a class="btn btn-primary" href="${BASE_API_URL}/admin" role="button">Link</a>`;
+              }
+              document.getElementById(
+                "sayHello"
+              ).innerText = `Hello ${user.username}!`;
+            }
+          });
+
+          document.getElementById("doUpdate").addEventListener("click", (e) => {
+            document.getElementById("divForm").style.display = "block";
+            document.getElementById("divBtn").style.display = "none";
+            if (currentUser)
+              document.getElementById("usernameInput").value =
+                currentUser.username;
+          });
+
+          document
+            .getElementById("update-Form")
+            .addEventListener("submit", (e) => {
+              e.preventDefault();
+              const username = document.getElementById("usernameInput").value;
+              const oldPassword = document.getElementById("password").value;
+              const password = document.getElementById("repeat_password").value;
+              const data = { username, password, oldPassword };
+
+              axiosApiInstance({
+                method: "post",
+                url: BASE_API_URL + "/api/user/update",
+                headers: {
+                  "Content-Type": "application/json",
+                  Authorization: "Bearer " + accessToken,
+                },
+                data,
+              })
+                .then((response) => {
+                  currentUser = { ...response.data.user };
+
+                  document.getElementById("password").value = "";
+                  document.getElementById("repeat_password").value = "";
+
+                  document.getElementById("divForm").style.display = "none";
+                  document.getElementById("divBtn").style.display = "block";
+                  document.getElementById(
+                    "sayHello"
+                  ).innerText = `Hello ${currentUser.username}!`;
+                })
+                .catch((error) => {
+                  console.log("error", error);
+                });
+            });
+        </script>
+
+        <% } %> <% if(tab===2) { %>
+
+        <h1>Login</h1>
+        <form id="login-Form">
+          <div class="form-group">
+            <label for="usernameInput">Username</label>
+            <input
+              class="form-control"
+              id="usernameInput"
+              aria-describedby="emailHelp"
+              placeholder="Enter username"
+              required="true"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Password"
+              required="true"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <script>
+          const loginForm = document.getElementById("login-Form");
+          loginForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const username = document.getElementById("usernameInput").value;
+            const password = document.getElementById("password").value;
+            const data = { username, password };
+            axios({
+              method: "POST",
+              url: BASE_API_URL + "/api/user/login",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              data,
+            })
+              .then((response) => {
+                const { data } = response;
+                localStorage.setItem(ACCESS_TOKEN, data.accessToken);
+                localStorage.setItem(REFRESH_TOKEN, data.refreshTocken);
+                if (data.accessToken) window.location.href = BASE_API_URL;
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          });
+        </script>
+
+        <% } %> <% if(tab===3) { %>
+
+        <h1>Register</h1>
+        <form id="regester-form">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input
+              minlength="3"
+              maxlength="30"
+              class="form-control"
+              id="usernameInput"
+              placeholder="Enter your username"
+              required="true"
+            />
+          </div>
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              placeholder="Enter your Password"
+              required="true"
+              minlength="4"
+              maxlength="30"
+            />
+          </div>
+          <div class="form-group">
+            <label for="repeat_password">Confirm password</label>
+            <input
+              type="password"
+              class="form-control"
+              id="repeat_password"
+              placeholder="Confirm Password"
+              required="true"
+              minlength="4"
+              maxlength="30"
+            />
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <script>
+          const regForm = document.getElementById("regester-form");
+          regForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const username = document.getElementById("usernameInput").value;
+            const password = document.getElementById("password").value;
+            const repeat_password = document.getElementById("repeat_password")
+              .value;
+            const data = { username, password, repeat_password };
+
+            fetch(BASE_API_URL + "/api/user/register", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify(data),
+            })
+              .then((response) => response.json())
+              .then((data) => {
+                localStorage.setItem(ACCESS_TOKEN, data.accessToken);
+                localStorage.setItem(REFRESH_TOKEN, data.refreshTocken);
+                window.location.href = BASE_API_URL;
+              })
+              .catch((error) => {
+                console.error("Error:", error);
+              });
+          });
+        </script>
+
+        <% } %>
+      </div>
+    </main>
+
+    <footer><%- include('../partials/footer'); %></footer>
+  </body>
+</html>
