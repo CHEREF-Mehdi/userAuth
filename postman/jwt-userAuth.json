@@ -3,7 +3,13 @@
 	"name": "jwt-userAuth",
 	"description": "",
 	"order": [
-		"c849834e-459d-3497-7a4c-0daed974898b"
+		"c849834e-459d-3497-7a4c-0daed974898b",
+		"0366d84a-3b59-a9ac-5dd5-917b676efb1b",
+		"05740815-42a2-d940-12ec-5db1f96a17d3",
+		"7c535b8a-2046-735d-d71c-19cfbc9ff397",
+		"b4c4cec6-66c0-9c86-e8c1-c9932b5194e5",
+		"cf03936b-d52d-c43a-7e28-24b4fa60dcc5",
+		"992254a0-3fdc-5be0-e8f0-bb3675669d92"
 	],
 	"folders": [],
 	"folders_order": [],
@@ -12,27 +18,221 @@
 	"public": false,
 	"requests": [
 		{
-			"id": "c849834e-459d-3497-7a4c-0daed974898b",
-			"headers": "",
-			"headerData": [],
-			"url": "",
+			"id": "0366d84a-3b59-a9ac-5dd5-917b676efb1b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/register",
 			"queryParams": [],
+			"preRequestScript": null,
 			"pathVariables": {},
 			"pathVariableData": [],
-			"preRequestScript": null,
-			"method": "GET",
-			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
-			"data": null,
-			"dataMode": "params",
-			"name": "login",
-			"description": "",
-			"descriptionFormat": "html",
-			"time": 1614974035567,
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
 			"version": 2,
-			"responses": [],
 			"tests": null,
 			"currentHelper": "normal",
-			"helperAttributes": {}
+			"helperAttributes": {},
+			"time": 1615145293273,
+			"name": "register",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\":\"pithoux\",\n\t\"password\":\"admin\",\n\t\"repeat_password\":\"admin\"\n}"
+		},
+		{
+			"id": "05740815-42a2-d940-12ec-5db1f96a17d3",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoyLCJpYXQiOjE2MTUwMzAyNTYsImV4cCI6MTYxNTExNjY1NiwiYXVkIjoiNjA0MzY3ZjBlNmVhMzEwMTUxMTA2YWM3IiwiaXNzIjoicGl0Y2hvdVgifQ.fNOGns-4fGHv3cDbvsD7mudzaVXAYCSggWe061l02DI\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoyLCJpYXQiOjE2MTUwMzAyNTYsImV4cCI6MTYxNTExNjY1NiwiYXVkIjoiNjA0MzY3ZjBlNmVhMzEwMTUxMTA2YWM3IiwiaXNzIjoicGl0Y2hvdVgifQ.fNOGns-4fGHv3cDbvsD7mudzaVXAYCSggWe061l02DI",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/update",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1615030416995,
+			"name": "set user",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\":\"pitchouX\",\n\t\"password\":\"admin\",\n\t\"oldPassword\":\"admin\"\n}"
+		},
+		{
+			"id": "7c535b8a-2046-735d-d71c-19cfbc9ff397",
+			"headers": "Content-Type: application/json\nAuthorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoxLCJpYXQiOjE2MTUwMzE5OTYsImV4cCI6MTYxNTExODM5NiwiYXVkIjoiNjA0MGQ3OTg1Yjc0YTQwMTgzYTQwOTFmIiwiaXNzIjoicGl0Y2hvdVgifQ.25fqxmBBpcWn_7XEqwPt20LNRsl8SEpuuJVt27dkXsM\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoxLCJpYXQiOjE2MTUwMzE5OTYsImV4cCI6MTYxNTExODM5NiwiYXVkIjoiNjA0MGQ3OTg1Yjc0YTQwMTgzYTQwOTFmIiwiaXNzIjoicGl0Y2hvdVgifQ.25fqxmBBpcWn_7XEqwPt20LNRsl8SEpuuJVt27dkXsM",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/profile",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1615145292466,
+			"name": "profile",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": [],
+			"rawModeData": ""
+		},
+		{
+			"id": "992254a0-3fdc-5be0-e8f0-bb3675669d92",
+			"headers": "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoxLCJpYXQiOjE2MTUwMzE5OTYsImV4cCI6MTYxNTExODM5NiwiYXVkIjoiNjA0MGQ3OTg1Yjc0YTQwMTgzYTQwOTFmIiwiaXNzIjoicGl0Y2hvdVgifQ.25fqxmBBpcWn_7XEqwPt20LNRsl8SEpuuJVt27dkXsM\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoxLCJpYXQiOjE2MTUwMzE5OTYsImV4cCI6MTYxNTExODM5NiwiYXVkIjoiNjA0MGQ3OTg1Yjc0YTQwMTgzYTQwOTFmIiwiaXNzIjoicGl0Y2hvdVgifQ.25fqxmBBpcWn_7XEqwPt20LNRsl8SEpuuJVt27dkXsM",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/admin",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1615145295491,
+			"name": "admin",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": []
+		},
+		{
+			"id": "b4c4cec6-66c0-9c86-e8c1-c9932b5194e5",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/refresh-token",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1615145291465,
+			"name": "refresh token",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": [],
+			"rawModeData": "{\n\t\"refreshTocken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoyLCJpYXQiOjE2MTUwMzAxMzMsImV4cCI6MTYxNzYyMjEzMywiYXVkIjoiNjA0MGQ3OTg1Yjc0YTQwMTgzYTQwOTFmIiwiaXNzIjoicGl0Y2hvdVgifQ.eT0CjNiGo3LzyMrdH-OY3LqwQNuQVesknll8Sdc33ZQ\"\n}"
+		},
+		{
+			"id": "c849834e-459d-3497-7a4c-0daed974898b",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/login",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"version": 2,
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1614974691245,
+			"name": "login",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": [],
+			"rawModeData": "{\n\t\"username\":\"admin\",\n\t\"password\":\"admin\"\n}"
+		},
+		{
+			"id": "cf03936b-d52d-c43a-7e28-24b4fa60dcc5",
+			"headers": "Content-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "http://localhost:89/api/user/logout",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "DELETE",
+			"data": [],
+			"dataMode": "raw",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1615145294633,
+			"name": "logout",
+			"description": "",
+			"collectionId": "24b39932-f9d3-eece-1ad7-db58ef2870c2",
+			"responses": [],
+			"rawModeData": "{\n\t\"refreshTocken\":\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJyb2xlIjoyLCJpYXQiOjE2MTUwMzAxMzMsImV4cCI6MTYxNzYyMjEzMywiYXVkIjoiNjA0MGQ3OTg1Yjc0YTQwMTgzYTQwOTFmIiwiaXNzIjoicGl0Y2hvdVgifQ.eT0CjNiGo3LzyMrdH-OY3LqwQNuQVesknll8Sdc33ZQ\"\n}"
 		}
 	]
 }
